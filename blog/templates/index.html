@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,12 +8,22 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title> {% block title %}Hello, {{username}}! {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <title> {% block title %} Тендеры ТСК {% endblock %}</title>
+
   </head>
+  <style>
+    td {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 8pt;
+    }
+  </style>
   <body>
   <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Навигационная панель</a>
+  <a class="navbar-brand" href="#">Тендеры ТСК (с сайта Государственных закупок РФ)</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -36,16 +46,96 @@
 </nav>
   </header>
 
-  {% block content %}
+    {% block content %}
 
-     {{dataframe}}
+
+  <button type="submit">Submit form</button>
+  <p id = "test"> </p>
+  <table id="table_id" class="table">
+      <thead>
+        <tr>
+    {% for elem in headers %}
+          <th scope="col">{{ elem }}</th>
+            {% endfor %}
+             </tr>
+      <tbody>
+
+  {% for row in dataframe_rows %}
+        <tr>
+
+          <td>
+            <div>{{ row.0 }}</div>
+          </td>
+           <td>
+            <div>{{ row.1 }}</div>
+          </td>
+           <td>
+            <div>{{ row.2 }}</div>
+          </td>
+           <td>
+            <div>{{ row.3 }}</div>
+          </td>
+           <td>
+            <div>{{ row.4 }}</div>
+          </td>
+           <td>
+            <div>{{ row.5 }}</div>
+          </td>
+           <td>
+            <div>{{ row.6 }}</div>
+          </td>
+           <td>
+            <div>{{ row.7 }}</div>
+          </td>
+           <td>
+            <a target="_blank" rel="noopener noreferrer" href = {{ row.8 }} >Ссылка на тендер</a>
+          </td>
+          <td>
+            <div>{{ row.9 }}</div>
+          </td>
+          <td>
+            {% csrf_token %}
+            <div> <input id="row-{{row.0}}" name="row-{{row.0}}" value="{{ row.10 }}" type="text" > </input> </div>
+          </td>
+
+        </tr>
+  {% endfor %}
+      </tbody>
+</table>
+      </thead>
 
 
     {% endblock %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script>
+
+    $(document).ready( function () {
+    $('#table_id').DataTable();
+    } );
+    $(document).ready(function() {
+    var table = $('#table_id').DataTable();
+
+    $('button').click( function() {
+        var data = table.$('input, select').serialize();
+        var request = new XMLHttpRequest();
+          function reqReadyStateChange() {
+            if (request.readyState == 4 && request.status == 200)
+                document.getElementById("test").innerHTML=request.responseText;
+             }
+        request.open("POST", "http://127.0.0.1:8000/postdata/");
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.onreadystatechange = reqReadyStateChange;
+        request.send(data);
+
+        return false;
+    } );
+} );
+  </script>
+
   </body>
 </html>

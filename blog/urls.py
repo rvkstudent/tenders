@@ -5,6 +5,6 @@ from . import views
 
 urlpatterns = [
     re_path(r'^$', views.show),
-    re_path(r'^(?P<username>\w+)/$', views.username),
+    path('postdata/', views.postdata),
     path('<slug:title>/<int:section>/', views.section),
 ]
