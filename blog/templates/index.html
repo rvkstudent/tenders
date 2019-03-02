@@ -87,16 +87,21 @@
            <td>
             <div>{{ row.date_created }}</div>
           </td>
+            <td>
+            <div>{{ row.phrase }}</div>
+          </td>
+
            <td>
             <a target="_blank" rel="noopener noreferrer" href = http://zakupki.gov.ru/223/purchase/public/purchase/info/common-info.html?regNumber={{ row.tender_id }} >Ссылка на тендер</a>
           </td>
-          <td>
-            <div>{{ row.9 }}</div>
+            <td>
+            <div>{{ row.manager }}</div>
           </td>
           <td>
             {% csrf_token %}
             <div> <input id="row-{{row.tender_id}}" name="row-{{row.tender_id}}" value="{{ row.tender_id }}" type="text" > </input> </div>
           </td>
+
 
         </tr>
   {% endfor %}

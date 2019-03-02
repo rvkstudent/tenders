@@ -39,6 +39,7 @@ class TendersTsc(models.Model):
     description = models.TextField(blank=True, null=True)
     date_found = models.DateTimeField(blank=True, null=True)
     manager = models.TextField(blank=True, null=True)
+    phrase = models.TextField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
 
     class Meta:
