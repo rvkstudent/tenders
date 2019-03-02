@@ -6,13 +6,14 @@ from django.template import loader
 import pandas as pd
 import urllib.parse
 import re
+import os
 
 # Create your views here.
 
 def show(request):
     template = loader.get_template('index.html')
 
-    df = pd.read_excel(u'C:\\GOSZAKUPKI\\PREVIOUS\\tender-22.02.xls')
+    df = pd.read_excel(os.path.join('/home','ubuntu','www','tenders','blog','templates','tender-22.02.xls'))
 
     df = df.head(10)
 
