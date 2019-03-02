@@ -64,38 +64,38 @@
         <tr>
 
           <td>
-            <div>{{ row.0 }}</div>
+            <div>{{ row.tender_id }}</div>
           </td>
            <td>
-            <div>{{ row.1 }}</div>
+            <div>{{ row.organisation }}</div>
           </td>
            <td>
-            <div>{{ row.2 }}</div>
+            <div>{{ row.description }}</div>
           </td>
            <td>
-            <div>{{ row.3 }}</div>
+            <div>{{ row.price }}</div>
           </td>
            <td>
-            <div>{{ row.4 }}</div>
+            <div>{{ row.date_found }}</div>
           </td>
            <td>
-            <div>{{ row.5 }}</div>
+            <div>{{ row.auction_type }}</div>
           </td>
            <td>
-            <div>{{ row.6 }}</div>
+            <div>{{ row.zakup_status }}</div>
           </td>
            <td>
-            <div>{{ row.7 }}</div>
+            <div>{{ row.date_created }}</div>
           </td>
            <td>
-            <a target="_blank" rel="noopener noreferrer" href = {{ row.8 }} >Ссылка на тендер</a>
+            <a target="_blank" rel="noopener noreferrer" href = http://zakupki.gov.ru/223/purchase/public/purchase/info/common-info.html?regNumber={{ row.tender_id }} >Ссылка на тендер</a>
           </td>
           <td>
             <div>{{ row.9 }}</div>
           </td>
           <td>
             {% csrf_token %}
-            <div> <input id="row-{{row.0}}" name="row-{{row.0}}" value="{{ row.10 }}" type="text" > </input> </div>
+            <div> <input id="row-{{row.tender_id}}" name="row-{{row.tender_id}}" value="{{ row.tender_id }}" type="text" > </input> </div>
           </td>
 
         </tr>

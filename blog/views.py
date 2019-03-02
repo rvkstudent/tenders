@@ -6,29 +6,19 @@ from django.template import loader
 import pandas as pd
 import urllib.parse
 import re
-import os
+from .models import TendersTsc
 
 # Create your views here.
 
 def show(request):
+
     template = loader.get_template('index.html')
 
-    df = pd.read_excel(os.path.join('/home','ubuntu','www','tenders','blog','templates','tender-22.02.xls'))
 
-    df = df.head(10)
 
-    df = df.fillna('')
+    context = { "headers": ['Номер','Организация','Описание', 'Цена', 'Когда найден', 'Конкурс', 'Статус', 'Дата размещения', 'Найдено по фразе', 'Ссылка на тендкр','Менелжер', 'Комментарий'],
+                'dataframe_rows': list(TendersTsc.objects.all())[:10],
 
-    df = df[['Номер процедуры' ,'Заказчик', 'Потребность', 'Начальная цена', 'Конкурс', 'Статус', 'Дата размещения', 'Найдено по фразе', 'Ссылка на тендер', 'Исполнитель', 'Примечания']]
-
-    dataframe_rows = []
-
-    for index, row in df.iterrows():
-        dataframe_rows.append(list(row))
-
-    context = {"headers" : list(df.columns),
-                'headers' : list(df.columns),
-               'dataframe_rows' : dataframe_rows,
                }
 
     return HttpResponse(template.render(context, request))
