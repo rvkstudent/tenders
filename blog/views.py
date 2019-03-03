@@ -7,6 +7,7 @@ import pandas as pd
 import urllib.parse
 import re
 from .models import TendersTsc
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -17,7 +18,7 @@ def show(request):
 
 
     context = { "headers": ['Номер','Организация','Описание', 'Цена', 'Когда найден', 'Конкурс', 'Статус', 'Дата размещения', 'Найдено по фразе', 'Ссылка','Менеджер', 'Комментарий'],
-                'dataframe_rows': list(TendersTsc.objects.all()),
+                'dataframe_rows': list(TendersTsc.objects.all())[:1],
 
                }
 
@@ -32,14 +33,33 @@ def section(request, title, section):
 
     return HttpResponse('Title = {0}, section = {1}. Тип title = {2}, тип section = {3}'.format(title, section, type(title), type(section)))
 
+@csrf_exempt
 def postdata(request):
 
-    result = re.findall(r'row-\d+=\D*&', urllib.parse.unquote(str(request.body)))
+    result_body = urllib.parse.unquote(str(request.body))
+
+    result = result_body.replace('b\'', '').split('&')
 
     res = ''
 
-    for elem in result:
-        res = "Процедура {}, значение {} ".format(elem.split('=')[0].replace('row-', ''),
-                                                  elem.split('=')[1].replace('&', ''))
+    if len(result)>0:
+
+        for elem in result:
+
+            if len(elem.split('=')[0].replace('row-', '')) > 0:
+
+                try:
+
+                    item = TendersTsc.objects.get(tender_id=elem.split('=')[0].replace('row-', ''))
+
+                    item.comment = elem.split('=')[1].replace('&', '')
+
+                    item.save()
+                except Exception as e:
+                    res = 'Exception'
+
+                res = res + "Элемент {}, Процедура {}, значение {} ".format(elem, elem.split('=')[0].replace('row-', ''),
+                                                      elem.split('=')[1].replace('&', ''))
+
 
     return HttpResponse(res)

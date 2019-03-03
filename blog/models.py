@@ -28,6 +28,15 @@ class Words(models.Model):
         managed = False
         db_table = 'words'
 
+
+class Stat(models.Model):
+    last_update = models.TextField(blank=True, null=True)
+    last_launch = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'tenders_stat'
+
 class TendersTsc(models.Model):
     tender_id = models.TextField(primary_key=True)
     auction_type = models.TextField(blank=True, null=True)
