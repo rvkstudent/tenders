@@ -38,7 +38,7 @@ def postdata(request):
 
     result_body = urllib.parse.unquote(str(request.body))
 
-    result = result_body.replace('b\'', '').split('&')
+    result = result_body.replace('b\"', '').split('&')
 
     res = ''
 
@@ -46,20 +46,23 @@ def postdata(request):
 
         for elem in result:
 
-            if len(elem.split('=')[0].replace('row-', '')) > 0:
+            id = elem.split('=')[0].replace('row-', '')
+
+            if len(id) > 0:
 
                 try:
 
-                    item = TendersTsc.objects.get(tender_id=elem.split('=')[0].replace('row-', ''))
+                    item = TendersTsc.objects.get(tender_id=id)
 
-                    item.comment = elem.split('=')[1].replace('&', '')
+                    value = elem.split('=')[1].replace('&', '')
+
+                    item.comment = value
 
                     item.save()
+
+                    res = res + 'Записан элемент {} значение {}; '.format(id, value)
+
                 except Exception as e:
-                    res = 'Exception'
+                    pass
 
-                res = res + "Элемент {}, Процедура {}, значение {} ".format(elem, elem.split('=')[0].replace('row-', ''),
-                                                      elem.split('=')[1].replace('&', ''))
-
-
-    return HttpResponse(res)
+    return HttpResponse("Данные обновлены")
