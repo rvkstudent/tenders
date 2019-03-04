@@ -95,11 +95,14 @@
             <a target="_blank" rel="noopener noreferrer" href = http://zakupki.gov.ru/223/purchase/public/purchase/info/common-info.html?regNumber={{ row.tender_id }} >Ссылка на тендер</a>
           </td>
             <td>
-            <div>{{ row.manager }}</div>
+            <div>{{ row.region }}</div>
           </td>
           <td>
-
-            <input id="row-{{row.tender_id}}" name="row-{{row.tender_id}}" value="{{ row.comment }}" type="text" > </input>
+            {% if row.comment == '' %}
+            <input id="row-{{row.tender_id}}" name="row-{{row.tender_id}}" value="" type="text" > </input>
+              {% else %}
+              <input id="row-{{row.tender_id}}" name="row-{{row.tender_id}}" value="{{row.comment}}" type="text" > </input>
+              {% endif %}
           </td>
 
 
@@ -120,9 +123,7 @@
 
   <script>
 
-    $(document).ready( function () {
-    $('#table_id').DataTable();
-    } );
+
     $(document).ready(function() {
     var table = $('#table_id').DataTable({"order": [[ 4, "desc" ]]});
 
