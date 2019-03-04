@@ -124,7 +124,7 @@
     $('#table_id').DataTable();
     } );
     $(document).ready(function() {
-    var table = $('#table_id').DataTable();
+    var table = $('#table_id').DataTable({"order": [[ 4, "desc" ]]});
 
     $('button').click( function() {
 

@@ -18,7 +18,7 @@ def show(request):
 
 
     context = { "headers": ['Номер','Организация','Описание', 'Цена', 'Когда найден', 'Конкурс', 'Статус', 'Дата размещения', 'Найдено по фразе', 'Ссылка','Менеджер', 'Комментарий'],
-                'dataframe_rows': list(TendersTsc.objects.all())[:1],
+                'dataframe_rows': list(TendersTsc.objects.all()),
 
                }
 
