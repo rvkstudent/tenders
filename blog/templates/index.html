@@ -49,7 +49,7 @@
     {% block content %}
 
 
-  <p> Последний запуск скрипта: {{ stat }}. Количество новых тендеров: {{ result }} </p>
+  <p> Последний запуск скрипта: {{ stat|date:"d E Y H:i" }}. Количество новых тендеров: {{ result }} </p>
   <button type="submit">Записать комментарии</button>
   <p id = "test"> </p>
   <table id="table_id" class="table">
@@ -77,7 +77,7 @@
             <div>{{ row.price }}</div>
           </td>
            <td>
-            <div>{{ row.date_found }}</div>
+            <div>{{ row.date_found|date:"d E Y H:i" }}</div>
           </td>
            <td>
             <div>{{ row.auction_type }}</div>
@@ -86,7 +86,7 @@
             <div>{{ row.zakup_status }}</div>
           </td>
            <td>
-            <div>{{ row.date_created }}</div>
+            <div>{{ row.date_created|date:"d E Y H:i" }}</div>
           </td>
             <td>
             <div>{{ row.phrase }}</div>
