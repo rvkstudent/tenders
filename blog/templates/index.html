@@ -80,16 +80,15 @@
             <div>{{ row.date_found|date:"d E Y H:i" }}</div>
           </td>
            <td>
-               {% if 'завершена' in row.zakup_status %}
-               This appears since "bc" is a substring of "abcdef"
-                <div style="font-weight: bold;font-color: red;">
-                    {% else %}
-                    <div>
-                    {{ row.auction_type }}</div>
-                     {% endif %}
+               <div> {{ row.auction_type }}</div>
           </td>
            <td>
-            <div>{{ row.zakup_status }}</div>
+           {% if 'завершена' in row.zakup_status %}
+                <div> <span style="font-weight: bold;color: red;">
+                    {% else %}
+                    <div> <span>
+                        {{ row.auction_type }}</span></div>
+                     {% endif %}
           </td>
            <td>
             <div>{{ row.date_created|date:"d E Y" }}</div>
