@@ -80,7 +80,12 @@
             <div>{{ row.date_found|date:"d E Y H:i" }}</div>
           </td>
            <td>
-            <div>{{ row.auction_type }}</div>
+               {% if 'завершена' in row.zakup_status %}
+                <div style="font-weight: bold;font-color: red;">
+                    {% else %}
+                    <div>
+                    {{ row.auction_type }}</div>
+                     {% endif %}
           </td>
            <td>
             <div>{{ row.zakup_status }}</div>
