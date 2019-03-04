@@ -6,19 +6,30 @@ from django.template import loader
 import pandas as pd
 import urllib.parse
 import re
-from .models import TendersTsc
+from .models import TendersTsc, TendersStat
 from django.views.decorators.csrf import csrf_exempt
+from django import template
+
+register = template.Library()
 
 # Create your views here.
+
+
 
 def show(request):
 
     template = loader.get_template('index.html')
 
+    stat = TendersStat.objects.get(change='update_tsc')
 
+    last_update = stat.last_update
+
+    result = int(stat.after) - int(stat.before)
 
     context = { "headers": ['Номер','Организация','Описание', 'Цена', 'Когда найден', 'Конкурс', 'Статус', 'Дата размещения', 'Найдено по фразе', 'Ссылка','Регион', 'Комментарий'],
                 'dataframe_rows': list(TendersTsc.objects.all()),
+                "stat" : last_update,
+                "result": result,
 
                }
 

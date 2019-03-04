@@ -49,7 +49,8 @@
     {% block content %}
 
 
-  <button type="submit">Submit form</button>
+  <p> Последний запуск скрипта: {{ stat }}. Количество новых тендеров: {{ result }} </p>
+  <button type="submit">Записать комментарии</button>
   <p id = "test"> </p>
   <table id="table_id" class="table">
       <thead>
@@ -98,7 +99,7 @@
             <div>{{ row.region }}</div>
           </td>
           <td>
-            {% if row.comment == '' %}
+            {% if row.comment == '' or row.comment == 'None' %}
             <input id="row-{{row.tender_id}}" name="row-{{row.tender_id}}" value="" type="text" > </input>
               {% else %}
               <input id="row-{{row.tender_id}}" name="row-{{row.tender_id}}" value="{{row.comment}}" type="text" > </input>

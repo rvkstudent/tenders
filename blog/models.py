@@ -29,13 +29,17 @@ class Words(models.Model):
         db_table = 'words'
 
 
-class Stat(models.Model):
+class TendersStat(models.Model):
     last_update = models.TextField(blank=True, null=True)
     last_launch = models.TextField(blank=True, null=True)
+    before = models.TextField(blank=True, null=True)
+    after = models.TextField(blank=True, null=True)
+    change = models.TextField(primary_key=True)
 
     class Meta:
         managed = False
         db_table = 'tenders_stat'
+
 
 class TendersTsc(models.Model):
     tender_id = models.TextField(primary_key=True)
