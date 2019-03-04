@@ -24,12 +24,15 @@ def show(request):
 
     result = int(stat.after) - int(stat.before)
 
+    empty = len(list(TendersTsc.objects.filter(comment='')))
+
     tenders_list = list(TendersTsc.objects.all())
 
     context = { "headers": ['Номер','Организация','Описание', 'Цена', 'Когда найден', 'Конкурс', 'Статус', 'Дата размещения', 'Найдено по фразе', 'Ссылка','Регион', 'Комментарий'],
                 'dataframe_rows':  tenders_list,
                 "stat" : last_update,
                 "result": result,
+                "empty": empty,
 
                }
 

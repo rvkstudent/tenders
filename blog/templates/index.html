@@ -50,6 +50,7 @@
 
 
   <p> Последний запуск скрипта: {{ stat|date:"d E Y H:i" }}. Количество новых тендеров: {{ result }} </p>
+  <p> Тендеров без комментария: {{ empty }}.</p>
   <button type="submit">Записать комментарии</button>
   <p id = "test"> </p>
   <table id="table_id" class="table">
@@ -106,11 +107,18 @@
             <div>{{ row.region }}</div>
           </td>
           <td>
+              <div>
             {% if row.comment == '' or row.comment == 'None' %}
             <input id="row-{{row.tender_id}}" name="row-{{row.tender_id}}" value="" type="text" > </input>
               {% else %}
               <input id="row-{{row.tender_id}}" name="row-{{row.tender_id}}" value="{{row.comment}}" type="text" > </input>
               {% endif %}
+                  </div>
+              <div>
+                  <a href="#" onclick="putText('row-{{row.tender_id}}', 'Не профиль')">ПН </a>
+                  <a href="#" onclick="putText('row-{{row.tender_id}}', 'Процедура завершена')">ПЗ </a>
+                  <a href="#" onclick="putText('row-{{row.tender_id}}', 'Зацепка №')">З </a>
+              </div>
           </td>
 
 
@@ -157,6 +165,13 @@
     } );
 } );
   </script>
+
+  <script type="text/javascript">
+function putText(id, str)
+{
+  document.getElementById(id).value = str;
+}
+</script>
 
   </body>
 </html>
