@@ -85,10 +85,12 @@
            <td>
            {% if 'завершена' in row.zakup_status %}
                 <div> <span style="font-weight: bold;color:red;">
+                    {% elif 'Подача' in row.zakup_status %}
+                    <div> <span style="font-weight: bold;color:green;">
                     {% else %}
                     <div> <span>
-                        {{ row.zakup_status }}</span></div>
                      {% endif %}
+                        {{ row.zakup_status }}</span></div>
           </td>
            <td>
             <div>{{ row.date_created|date:"d E Y" }}</div>
