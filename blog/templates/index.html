@@ -111,7 +111,7 @@
             {% if row.comment == '' or row.comment == 'None' %}
             <input id="row-{{row.tender_id}}" name="row-{{row.tender_id}}" value="" type="text" > </input>
               {% else %}
-              <input id="row-{{row.tender_id}}" name="row-{{row.tender_id}}" value="{{row.comment}}" type="text" > </input>
+              <input id="row-{{row.tender_id}}" name="row-{{row.tender_id}}" value="{{row.comment}}" type="text" title = "{{row.comment}}"> </input>
               {% endif %}
                   </div>
               <div>
