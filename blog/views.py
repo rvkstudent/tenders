@@ -24,7 +24,7 @@ def show(request):
 
     result = int(stat.after) - int(stat.before)
 
-    empty = len(list(TendersTsc.objects.filter(comment='')))
+    empty = TendersTsc.objects.filter(comment='').count()
 
     tenders_list = list(TendersTsc.objects.all())
 
