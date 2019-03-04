@@ -84,10 +84,10 @@
           </td>
            <td>
            {% if 'завершена' in row.zakup_status %}
-                <div> <span style="font-weight: bold;color: red;">
+                <div> <span style="font-weight: bold;color:red;">
                     {% else %}
                     <div> <span>
-                        {{ row.auction_type }}</span></div>
+                        {{ row.zakup_status }}</span></div>
                      {% endif %}
           </td>
            <td>
