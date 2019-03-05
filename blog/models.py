@@ -55,6 +55,7 @@ class TendersTsc(models.Model):
     phrase = models.TextField(blank=True, null=True)
     region = models.TextField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
+    tender_link = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
