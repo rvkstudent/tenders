@@ -63,10 +63,18 @@
       <tbody>
 
   {% for row in dataframe_rows %}
+
         <tr>
 
+            <tr>
+
           <td>
-            <div>{{ row.tender_id }}</div>
+              {% if 'зацеп' in row.comment|lower %}
+            <div style="border:2pt solid green;padding:inherit;">
+                {% else %}
+                <div>
+                 {% endif %}
+                    {{ row.tender_id }}</div>
           </td>
            <td>
             <div>{{ row.organisation }}</div>
@@ -100,8 +108,8 @@
             <div>{{ row.phrase }}</div>
           </td>
 
-           <td>
-            <a target="_blank" rel="noopener noreferrer" href = http://zakupki.gov.ru/223/purchase/public/purchase/info/common-info.html?regNumber={{ row.tender_id }} >Ссылка на тендер</a>
+           <td style = "text-align: center;">
+            <a target="_blank" rel="noopener noreferrer" href = http://zakupki.gov.ru/223/purchase/public/purchase/info/common-info.html?regNumber={{ row.tender_id }} >>>></a>
           </td>
             <td>
             <div>{{ row.region }}</div>
