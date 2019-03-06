@@ -7,5 +7,6 @@ from . import models
 admin.site.register(models.Tenders)
 admin.site.register(models.Words)
 admin.site.register(models.TendersTsc)
+admin.site.register(models.StopWords)
 
 # Register your models here.

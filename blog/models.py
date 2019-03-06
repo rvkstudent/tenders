@@ -61,3 +61,12 @@ class TendersTsc(models.Model):
         managed = False
         db_table = 'tenders_tsc'
 
+class StopWords(models.Model):
+    s_word = models.TextField(primary_key=True)
+
+    class Meta:
+        managed = False
+        db_table = 'stop_words'
+
+
+
